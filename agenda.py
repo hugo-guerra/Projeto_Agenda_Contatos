@@ -15,7 +15,7 @@ class Agenda:
         )
         """)
 
-        self.conectar.commit()
+        self.conectar.commit() 
 
     def cadastros_contatos(self, nome, telefone, email, categoria):
         self.cursor.execute("""
@@ -31,3 +31,11 @@ class Agenda:
         dados = self.cursor.fetchall()
 
         return dados 
+    
+    def buscar_contatos(self, buscar):
+        self.cursor.execute("SELECT * FROM Contatos WHERE nome = ? OR telefone = ? OR email = ?", (buscar, buscar, buscar))
+
+        dados = self.cursor.fetchall()
+
+        return dados
+
