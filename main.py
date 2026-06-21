@@ -1,7 +1,10 @@
-class Contato:
-    def __init__(self, id, nome, telefone, email, categoria):
-        self.id = id
-        self.nome = nome
-        self.telefone = telefone
-        self.email = email
-        self.categoria = categoria 
+from contato import Contato
+from agenda import Agenda
+import tkinter as tk
+
+janela = tk.Tk()
+#LEMBRAR: tk.Tk() -> é a chamada que cria a janela principal da aplicação Tkinter
+janela.title("Minha Janela")
+
+janela.mainloop()
+#LEMBRAR: mainloop() -> método que inicia o loop principal de eventos do Tkinter
