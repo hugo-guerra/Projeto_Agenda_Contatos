@@ -25,5 +25,9 @@ class Agenda:
 
         self.conectar.commit()
 
-agenda = Agenda()
-agenda.cadastros_contatos("Joao", "11999999999", "joao@email.com", "Amigos")
+    def listar_contatos(self):
+        self.cursor.execute("SELECT * FROM Contatos")
+
+        dados = self.cursor.fetchall()
+
+        return dados 
