@@ -16,3 +16,14 @@ class Agenda:
         """)
 
         self.conectar.commit()
+
+    def cadastros_contatos(self, nome, telefone, email, categoria):
+        self.cursor.execute("""
+        INSERT INTO Contatos (nome, telefone, email, categoria)
+        VALUES(?, ?, ?, ?)          
+        """, (nome, telefone, email, categoria))
+
+        self.conectar.commit()
+
+agenda = Agenda()
+agenda.cadastros_contatos("Joao", "11999999999", "joao@email.com", "Amigos")
