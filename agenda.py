@@ -44,3 +44,8 @@ class Agenda:
         self.cursor.execute("UPDATE Contatos SET nome = ?, telefone = ?, email = ?, categoria = ? WHERE id = ?", (nome, telefone, email, categoria, id))
 
         self.conectar.commit()
+
+    def remover_contato(self, id):
+        self.cursor.execute("DELETE FROM Contatos WHERE id = ?", (id,))
+
+        self.conectar.commit()
