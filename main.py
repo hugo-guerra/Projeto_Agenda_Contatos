@@ -34,6 +34,15 @@ label_categoria.grid(row=4, column=0)
 entry_categoria = tk.Entry(janela)
 entry_categoria.grid(row=4, column=1)
 
+botao_cadastrar = tk.Button(janela, text="Cadastrar")
+botao_cadastrar.grid(row=5, column=0)
+
+botao_buscar = tk.Button(janela, text="Buscar")
+botao_buscar.grid(row=5, column=1)
+
+botao_limpar = tk.Button(janela, text="Limpar")
+botao_limpar.grid(row=5, column=2)
+
 
 
 
