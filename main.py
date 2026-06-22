@@ -41,7 +41,7 @@ def cadastrar():
     telefone = entry_telefone.get()
     email = entry_email.get()
     categoria = entry_categoria.get()
-    
+
     agenda.cadastros_contatos(nome, telefone, email, categoria)
 
     entry_nome.delete(0, tk.END)
@@ -57,6 +57,16 @@ botao_buscar.grid(row=5, column=1)
 
 botao_limpar = tk.Button(janela, text="Limpar")
 botao_limpar.grid(row=5, column=2)
+
+lista_contatos = tk.Listbox(janela, width=60, height=15)
+lista_contatos.grid(row=6, column=0)
+
+def atualizar_lista():
+    lista_contatos.delete(0, tk.END)
+
+    for contato in agenda.listar_contatos():
+        lista_contatos.insert(tk.END, f"ID: {contato[0]} | Nome: {contato[1]} | Telefone: {contato[2]} | E-mail: {contato[3]} | Categoria: {contato[4]}")
+
 
 
 
