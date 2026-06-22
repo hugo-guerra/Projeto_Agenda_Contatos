@@ -1,6 +1,7 @@
 from contato import Contato
 from agenda import Agenda
 import tkinter as tk
+from tkinter import messagebox
 
 janela = tk.Tk()
 #LEMBRAR: tk.Tk() -> é a chamada que cria a janela principal da aplicação Tkinter
@@ -36,32 +37,11 @@ label_categoria.grid(row=4, column=0)
 entry_categoria = tk.Entry(janela)
 entry_categoria.grid(row=4, column=1)
 
-def cadastrar():
-    nome = entry_nome.get()
-    telefone = entry_telefone.get()
-    email = entry_email.get()
-    categoria = entry_categoria.get()
+label_busca = tk.Label(janela, text="Buscar:")
+label_busca.grid(row=5, column=0)
 
-    agenda.cadastros_contatos(nome, telefone, email, categoria)
-
-    entry_nome.delete(0, tk.END)
-    entry_telefone.delete(0, tk.END)
-    entry_email.delete(0, tk.END)
-    entry_categoria.delete(0, tk.END)
-
-    atualizar_lista()
-
-botao_cadastrar = tk.Button(janela, text="Cadastrar", command=cadastrar)
-botao_cadastrar.grid(row=5, column=0)
-
-botao_buscar = tk.Button(janela, text="Buscar")
-botao_buscar.grid(row=5, column=1)
-
-botao_limpar = tk.Button(janela, text="Limpar")
-botao_limpar.grid(row=5, column=2)
-
-lista_contatos = tk.Listbox(janela, width=60, height=15)
-lista_contatos.grid(row=6, column=0)
+entry_busca = tk.Entry(janela)
+entry_busca.grid(row=5, column=1)
 
 def atualizar_lista():
     lista_contatos.delete(0, tk.END)
@@ -69,6 +49,37 @@ def atualizar_lista():
     for contato in agenda.listar_contatos():
         lista_contatos.insert(tk.END, f"ID: {contato[0]} | Nome: {contato[1]} | Telefone: {contato[2]} | E-mail: {contato[3]} | Categoria: {contato[4]}")
 
+def cadastrar():
+    nome = entry_nome.get()
 
+    if nome == "":
+        messagebox.showwarning("Aviso", "Nome é obrigatório!")
+    else:
+        telefone = entry_telefone.get()
+        email = entry_email.get()
+        categoria = entry_categoria.get()
+
+        agenda.cadastros_contatos(nome, telefone, email, categoria)
+
+        entry_nome.delete(0, tk.END)
+        entry_telefone.delete(0, tk.END)
+        entry_email.delete(0, tk.END)
+        entry_categoria.delete(0, tk.END)
+
+        atualizar_lista()
+
+botao_cadastrar = tk.Button(janela, text="Cadastrar", command=cadastrar)
+botao_cadastrar.grid(row=6, column=0)
+
+botao_buscar = tk.Button(janela, text="Buscar")
+botao_buscar.grid(row=6, column=1)
+
+botao_limpar = tk.Button(janela, text="Limpar")
+botao_limpar.grid(row=6, column=2,)
+
+lista_contatos = tk.Listbox(janela, width=80, height=15)
+lista_contatos.grid(row=7, column=0, columnspan=3)
+
+atualizar_lista()
 janela.mainloop()
 #LEMBRAR: mainloop() -> método que inicia o loop principal de eventos do Tkinter, mantém a janela aberta
