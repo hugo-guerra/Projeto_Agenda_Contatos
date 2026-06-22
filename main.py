@@ -7,6 +7,8 @@ janela = tk.Tk()
 janela.title("Minha Janela")
 janela.geometry("600x700")
 
+agenda = Agenda()
+
 label_titulo = tk.Label(janela, text="Agenda de Contatos")
 label_titulo.grid(row=0, column=0)
 
@@ -34,7 +36,20 @@ label_categoria.grid(row=4, column=0)
 entry_categoria = tk.Entry(janela)
 entry_categoria.grid(row=4, column=1)
 
-botao_cadastrar = tk.Button(janela, text="Cadastrar")
+def cadastrar():
+    nome = entry_nome.get()
+    telefone = entry_telefone.get()
+    email = entry_email.get()
+    categoria = entry_categoria.get()
+    
+    agenda.cadastros_contatos(nome, telefone, email, categoria)
+
+    entry_nome.delete(0, tk.END)
+    entry_telefone.delete(0, tk.END)
+    entry_email.delete(0, tk.END)
+    entry_categoria.delete(0, tk.END)
+
+botao_cadastrar = tk.Button(janela, text="Cadastrar", command=cadastrar)
 botao_cadastrar.grid(row=5, column=0)
 
 botao_buscar = tk.Button(janela, text="Buscar")
