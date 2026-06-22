@@ -49,6 +49,8 @@ def cadastrar():
     entry_email.delete(0, tk.END)
     entry_categoria.delete(0, tk.END)
 
+    atualizar_lista()
+
 botao_cadastrar = tk.Button(janela, text="Cadastrar", command=cadastrar)
 botao_cadastrar.grid(row=5, column=0)
 
@@ -66,19 +68,6 @@ def atualizar_lista():
 
     for contato in agenda.listar_contatos():
         lista_contatos.insert(tk.END, f"ID: {contato[0]} | Nome: {contato[1]} | Telefone: {contato[2]} | E-mail: {contato[3]} | Categoria: {contato[4]}")
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 janela.mainloop()
