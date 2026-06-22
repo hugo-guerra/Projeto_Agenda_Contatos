@@ -68,10 +68,26 @@ def cadastrar():
 
         atualizar_lista()
 
+def buscar():
+    busca = entry_busca.get()
+    
+    if busca == "":
+        messagebox.showwarning("Aviso", "Campo vazio!")
+    else:
+        resultados = agenda.buscar_contatos(busca)
+
+        lista_contatos.delete(0, tk.END)
+
+        if resultados:
+            for contato in resultados:
+                lista_contatos.insert(tk.END, f"ID: {contato[0]} | Nome: {contato[1]} | Telefone: {contato[2]} | E-mail: {contato[3]} | Categoria: {contato[4]}")
+        else:
+            messagebox.showwarning("Aviso", "Nenhum contato encontrado!")
+
 botao_cadastrar = tk.Button(janela, text="Cadastrar", command=cadastrar)
 botao_cadastrar.grid(row=6, column=0)
 
-botao_buscar = tk.Button(janela, text="Buscar")
+botao_buscar = tk.Button(janela, text="Buscar", command=buscar)
 botao_buscar.grid(row=6, column=1)
 
 botao_limpar = tk.Button(janela, text="Limpar")
@@ -80,6 +96,9 @@ botao_limpar.grid(row=6, column=2,)
 lista_contatos = tk.Listbox(janela, width=80, height=15)
 lista_contatos.grid(row=7, column=0, columnspan=3)
 
+
+entry_busca.insert(9, "regi")
+buscar()
 atualizar_lista()
 janela.mainloop()
 #LEMBRAR: mainloop() -> método que inicia o loop principal de eventos do Tkinter, mantém a janela aberta
