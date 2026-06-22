@@ -7,8 +7,33 @@ janela = tk.Tk()
 janela.title("Minha Janela")
 janela.geometry("600x700")
 
-label = tk.Label(janela, text="Agenda de Contatos")
-label.grid(row=0, column=0)
+label_titulo = tk.Label(janela, text="Agenda de Contatos")
+label_titulo.grid(row=0, column=0)
+
+label_nome = tk.Label(janela, text="Nome: ")
+label_nome.grid(row=1, column=0)
+
+entry_nome = tk.Entry(janela)
+entry_nome.grid(row=1, column=1)
+
+label_telefone = tk.Label(janela, text="Telefone: ")
+label_telefone.grid(row=2, column=0)
+
+entry_telefone = tk.Entry(janela)
+entry_telefone.grid(row=2, column=1)
+
+label_email = tk.Label(janela, text="E-mail: ")
+
+
+
+
+
+
+
+
+
+
+
 
 
 
