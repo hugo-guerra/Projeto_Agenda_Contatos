@@ -10,19 +10,29 @@ janela.geometry("600x700")
 label_titulo = tk.Label(janela, text="Agenda de Contatos")
 label_titulo.grid(row=0, column=0)
 
-label_nome = tk.Label(janela, text="Nome: ")
+label_nome = tk.Label(janela, text="Nome:")
 label_nome.grid(row=1, column=0)
 
 entry_nome = tk.Entry(janela)
 entry_nome.grid(row=1, column=1)
 
-label_telefone = tk.Label(janela, text="Telefone: ")
+label_telefone = tk.Label(janela, text="Telefone:")
 label_telefone.grid(row=2, column=0)
 
 entry_telefone = tk.Entry(janela)
 entry_telefone.grid(row=2, column=1)
 
-label_email = tk.Label(janela, text="E-mail: ")
+label_email = tk.Label(janela, text="E-mail:")
+label_email.grid(row=3, column=0)
+
+entry_email = tk.Entry(janela)
+entry_email.grid(row=3, column=1)
+
+label_categoria = tk.Label(janela, text="Categoria:")
+label_categoria.grid(row=4, column=0)
+
+entry_categoria = tk.Entry(janela)
+entry_categoria.grid(row=4, column=1)
 
 
 
