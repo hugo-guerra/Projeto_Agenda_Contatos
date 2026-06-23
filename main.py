@@ -49,6 +49,18 @@ entry_busca.grid(row=5, column=1, sticky="ew")
 
 id_editado = None
 
+def resetar_edicao():
+    global id_editado
+    id_editado = None
+
+    entry_nome.delete(0, tk.END)
+    entry_telefone.delete(0, tk.END)
+    entry_email.delete(0, tk.END)
+    entry_categoria.delete(0, tk.END)
+
+    botao_editar.config(text="Editar")
+
+
 def atualizar_lista():
     lista_contatos.delete(0, tk.END)
 
@@ -56,6 +68,10 @@ def atualizar_lista():
         lista_contatos.insert(tk.END, f"ID: {contato[0]} | Nome: {contato[1]} | Telefone: {contato[2]} | E-mail: {contato[3]} | Categoria: {contato[4]}")
 
 def cadastrar():
+    if id_editado is not None:
+        messagebox.showwarning("Aviso", "Salve ou clique em Limpar para cancelar a edição antes de continuar!")
+        return
+
     nome = entry_nome.get()
 
     if nome == "":
@@ -66,12 +82,9 @@ def cadastrar():
         email = entry_email.get()
         categoria = entry_categoria.get()
 
-        agenda.cadastros_contatos(nome, telefone, email, categoria)
+        resetar_edicao()
 
-        entry_nome.delete(0, tk.END)
-        entry_telefone.delete(0, tk.END)
-        entry_email.delete(0, tk.END)
-        entry_categoria.delete(0, tk.END)
+        agenda.cadastros_contatos(nome, telefone, email, categoria)
 
         atualizar_lista()
 
@@ -92,6 +105,12 @@ def buscar():
             messagebox.showwarning("Aviso", "Nenhum contato encontrado!")
 
 def remover():
+    if id_editado is not None:
+        messagebox.showwarning("Aviso", "Salve ou clique em Limpar para cancelar a edição antes de continuar!")
+        return
+    
+    resetar_edicao()
+
     selecao = lista_contatos.curselection() 
     #LEMBRAR: .curselection() -> é usado principalmente em widgets como Listbox do Tkinter para descobrir quais itens estão selecionados pelo usuário
     if selecao:
@@ -156,7 +175,7 @@ botao_editar.grid(row=6, column=2,)
 botao_remover = tk.Button(janela, text="Remover", command=remover)
 botao_remover.grid(row=6, column=3,)
 
-botao_limpar = tk.Button(janela, text="Limpar")
+botao_limpar = tk.Button(janela, text="Limpar", command=resetar_edicao)
 botao_limpar.grid(row=6, column=4,)
 
 lista_contatos = tk.Listbox(janela, height=15)
