@@ -8,6 +8,10 @@ janela = tk.Tk()
 janela.title("Minha Janela")
 janela.geometry("600x700")
 
+for i in range(5):
+    janela.columnconfigure(i, weight=1)
+janela.rowconfigure(7, weight=1)
+
 agenda = Agenda()
 
 label_titulo = tk.Label(janela, text="Agenda de Contatos")
@@ -17,31 +21,31 @@ label_nome = tk.Label(janela, text="Nome:")
 label_nome.grid(row=1, column=0)
 
 entry_nome = tk.Entry(janela)
-entry_nome.grid(row=1, column=1)
+entry_nome.grid(row=1, column=1, sticky="ew")
 
 label_telefone = tk.Label(janela, text="Telefone:")
 label_telefone.grid(row=2, column=0)
 
 entry_telefone = tk.Entry(janela)
-entry_telefone.grid(row=2, column=1)
+entry_telefone.grid(row=2, column=1, sticky="ew")
 
 label_email = tk.Label(janela, text="E-mail:")
 label_email.grid(row=3, column=0)
 
 entry_email = tk.Entry(janela)
-entry_email.grid(row=3, column=1)
+entry_email.grid(row=3, column=1, sticky="ew")
 
 label_categoria = tk.Label(janela, text="Categoria:")
 label_categoria.grid(row=4, column=0)
 
 entry_categoria = tk.Entry(janela)
-entry_categoria.grid(row=4, column=1)
+entry_categoria.grid(row=4, column=1, sticky="ew")
 
 label_busca = tk.Label(janela, text="Buscar:")
 label_busca.grid(row=5, column=0)
 
 entry_busca = tk.Entry(janela)
-entry_busca.grid(row=5, column=1)
+entry_busca.grid(row=5, column=1, sticky="ew")
 
 def atualizar_lista():
     lista_contatos.delete(0, tk.END)
@@ -103,14 +107,17 @@ botao_cadastrar.grid(row=6, column=0)
 botao_buscar = tk.Button(janela, text="Buscar", command=buscar)
 botao_buscar.grid(row=6, column=1)
 
+botao_editar = tk.Button(janela, text="Editar")
+botao_editar.grid(row=6, column=2,)
+
 botao_remover = tk.Button(janela, text="Remover", command=remover)
-botao_remover.grid(row=6, column=2,)
+botao_remover.grid(row=6, column=3,)
 
 botao_limpar = tk.Button(janela, text="Limpar")
-botao_limpar.grid(row=6, column=3,)
+botao_limpar.grid(row=6, column=4,)
 
-lista_contatos = tk.Listbox(janela, width=80, height=15)
-lista_contatos.grid(row=7, column=0, columnspan=4)
+lista_contatos = tk.Listbox(janela, height=15)
+lista_contatos.grid(row=7, column=0, sticky="nsew", columnspan=5)
 
 atualizar_lista()
 janela.mainloop()
