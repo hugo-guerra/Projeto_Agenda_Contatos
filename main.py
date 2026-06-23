@@ -47,6 +47,8 @@ label_busca.grid(row=5, column=0)
 entry_busca = tk.Entry(janela)
 entry_busca.grid(row=5, column=1, sticky="ew")
 
+id_editado = None
+
 def atualizar_lista():
     lista_contatos.delete(0, tk.END)
 
@@ -58,6 +60,7 @@ def cadastrar():
 
     if nome == "":
         messagebox.showwarning("Aviso", "Nome é obrigatório!")
+        #LEMBRAR: messagebox.showwarning() -> é uma função do Tkinter que exibe uma caixa de diálogo de aviso para o usuário
     else:
         telefone = entry_telefone.get()
         email = entry_email.get()
@@ -89,8 +92,8 @@ def buscar():
             messagebox.showwarning("Aviso", "Nenhum contato encontrado!")
 
 def remover():
-    selecao = lista_contatos.curselection()
-
+    selecao = lista_contatos.curselection() 
+    #LEMBRAR: .curselection() -> é usado principalmente em widgets como Listbox do Tkinter para descobrir quais itens estão selecionados pelo usuário
     if selecao:
         texto = lista_contatos.get(selecao[0])
         partes = texto.split(" | ")
@@ -100,6 +103,46 @@ def remover():
         atualizar_lista()
     else:
         messagebox.showwarning("Aviso", "Nem um contato foi selecionado!")
+
+def editar():
+    global id_editado
+
+    if id_editado is None:
+        selecao = lista_contatos.curselection()
+
+        if selecao:
+            texto = lista_contatos.get(selecao[0])
+            partes = texto.split(" | ")
+            id_editado = int(partes[0].split(" ")[1])
+
+            contato = agenda.buscar_contatos(str(id_editado))[0]
+
+            entry_nome.delete(0, tk.END)
+            entry_nome.insert(0, contato[1])
+
+            entry_telefone.delete(0, tk.END)
+            entry_telefone.insert(0, contato[2])
+
+            entry_email.delete(0, tk.END)
+            entry_email.insert(0, contato[3])
+
+            entry_categoria.delete(0, tk.END)
+            entry_categoria.insert(0, contato[4])
+
+            botao_editar.config(text="Salvar")
+        else:
+            messagebox.showwarning("Aviso", "Erro em salvar o contato!")
+    else:
+        nome = entry_nome.get()
+        telefone = entry_telefone.get()
+        email = entry_email.get()
+        categoria = entry_categoria.get()
+
+        agenda.editar_contato(id_editado, nome, telefone, email, categoria)
+
+        botao_editar.config(text="Editar")
+        id_editado = None
+        atualizar_lista()
 
 botao_cadastrar = tk.Button(janela, text="Cadastrar", command=cadastrar)
 botao_cadastrar.grid(row=6, column=0)
