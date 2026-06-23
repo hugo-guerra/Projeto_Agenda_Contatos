@@ -115,7 +115,7 @@ def editar():
             partes = texto.split(" | ")
             id_editado = int(partes[0].split(" ")[1])
 
-            contato = agenda.buscar_contatos(str(id_editado))[0]
+            contato = agenda.buscar_por_id(id_editado)
 
             entry_nome.delete(0, tk.END)
             entry_nome.insert(0, contato[1])

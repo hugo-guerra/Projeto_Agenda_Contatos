@@ -40,6 +40,10 @@ class Agenda:
         
         return dados
     
+    def buscar_por_id(self, id):
+        self.cursor.execute("SELECT * FROM Contatos WHERE id = ?", (id,))
+        return self.cursor.fetchone() #LEMBRAR: .fetchone() -> retorna só uma tupla, uma linha por vez
+    
     def editar_contato(self, id, nome, telefone, email, categoria): #Usando ID pois é a forma mais segura de busca já que ele é PK
         self.cursor.execute("UPDATE Contatos SET nome = ?, telefone = ?, email = ?, categoria = ? WHERE id = ?", (nome, telefone, email, categoria, id))
 
