@@ -131,7 +131,7 @@ def editar():
 
             botao_editar.config(text="Salvar")
         else:
-            messagebox.showwarning("Aviso", "Erro em salvar o contato!")
+            messagebox.showwarning("Aviso", "Selecione um contato para editar!")
     else:
         nome = entry_nome.get()
         telefone = entry_telefone.get()
@@ -150,7 +150,7 @@ botao_cadastrar.grid(row=6, column=0)
 botao_buscar = tk.Button(janela, text="Buscar", command=buscar)
 botao_buscar.grid(row=6, column=1)
 
-botao_editar = tk.Button(janela, text="Editar")
+botao_editar = tk.Button(janela, text="Editar", command=editar)
 botao_editar.grid(row=6, column=2,)
 
 botao_remover = tk.Button(janela, text="Remover", command=remover)
